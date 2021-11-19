@@ -1,19 +1,24 @@
-kind: Ingress
-apiVersion: networking.k8s.io/v1
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: influxdb-ingress
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
-    traefik.ingress.kubernetes.io/rewrite-target: /
-
 spec:
-  rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: influxdb-service
-                port:
-                  number: 8086
+  entryPoints:
+    - web
+  routes:
+    - match: PathPrefix(`/influxdb`)
+      kind: Rule
+      services:
+        - name: influxdb-service
+          port: 8086
+      middlewares:
+        - name: influxdb-stripprefix
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: influxdb-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /influxdb
