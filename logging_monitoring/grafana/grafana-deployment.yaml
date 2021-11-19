@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: monitoring
+  labels:
+    app: grafana
+  name: grafana-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: grafana-secrets
+        image: grafana/grafana:8.2.5
+        name: grafana
+        ports:
+          - containerPort: 3000
+        volumeMounts:
+          - name: data-dir
+            mountPath: /var/lib/grafana/
+          - mountPath: /etc/grafana/grafana.ini
+            name: grafana-config
+            subPath: grafana.ini
+            readOnly: true
+          #- name: grafana-config
+          #  mountPath: /etc/grafana/provisioning/datasources/influxdb-telegraf-datasource.yml
+          #  readOnly: true
+          #  subPath: influxdb-telegraf-datasource.yml
+          #- name: grafana-config
+          #  mountPath: /etc/grafana/provisioning/dashboards/grafana-dashboard-provider.yml
+          #  readOnly: true
+          #  subPath: grafana-dashboard-provider.yml
+      securityContext:
+        fsGroup: 472
+      volumes:
+        - name: data-dir
+          persistentVolumeClaim:
+            claimName: grafana-data
+        - name: grafana-config
+          configMap:
+            name: grafana-config
