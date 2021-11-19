@@ -2,6 +2,8 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: influxdb-ingress
+  namespace: monitoring
+
 spec:
   entryPoints:
     - web
@@ -11,6 +13,7 @@ spec:
       services:
         - name: influxdb-service
           port: 8086
+          namespace: monitoring
       middlewares:
         - name: influxdb-stripprefix
 ---
@@ -18,6 +21,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: influxdb-stripprefix
+  namespace: monitoring
 spec:
   stripPrefix:
     prefixes:
