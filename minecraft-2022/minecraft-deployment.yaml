@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-2022-deployment
+  namespace: production
+
+spec:
+  selector:
+    matchLabels:
+      app: minecraft-2022
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: minecraft-2022
+    spec:
+      containers:
+        - image: itzg/minecraft-server:latest
+          name: minecraft
+          ports:
+            - containerPort: 25565
+          volumeMounts:
+            - mountPath: /data
+              name: minecraft-2022-data-data
+            - mountPath: /mods
+              name: minecraft-2022-mods-data
+          envFrom:
+            - configMapRef:
+                name: minecraft-2022-config
+      volumes:
+        - name: minecraft-2022-data-data
+          persistentVolumeClaim:
+            claimName: minecraft-2022-data-data
+        - name: minecraft-2022-mods-data
+          persistentVolumeClaim:
+            claimName: minecraft-2022-mods-data

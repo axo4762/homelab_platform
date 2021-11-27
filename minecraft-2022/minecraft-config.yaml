@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: minecraft-2022-config
+  namespace: production
+
+data:
+  EULA: "TRUE"
+  SERVER_NAME: "Kubernetes Server"
+  MOTD: "Welcome to our Minecraft Server!"
+  DIFFICULTY: "normal"
+  MODE: "survival"
+  WHITELIST: "andrew23120,mauveflower" #Allowed Players
+  OPS: "andrew23120,mauveflower" # Admins
+  SNOOPER_ENABLED: "false"
