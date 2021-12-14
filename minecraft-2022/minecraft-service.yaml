@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: minecraft-2022-service
+  namespace: production
+
+spec:
+  type: NodePort
+  selector:
+    app: minecraft-2022
+  ports:
+    - protocol: TCP
+      port: 25565
+      targetPort: 25565
+      nodePort: 30000
