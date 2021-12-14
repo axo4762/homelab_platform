@@ -27,6 +27,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: minecraft-2022-config
+      nodeSelector:
+        nodePort: available
       volumes:
         - name: minecraft-2022-data-data
           persistentVolumeClaim:

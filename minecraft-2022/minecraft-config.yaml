@@ -10,6 +10,6 @@ data:
   MOTD: "Welcome to our Minecraft Server!"
   DIFFICULTY: "normal"
   MODE: "survival"
-  WHITELIST: "andrew23120,mauveflower" #Allowed Players
-  OPS: "andrew23120,mauveflower" # Admins
+  WHITELIST: "andrew23120,mauveflower,Lexington427,Apex_Steele" #Allowed Players
+  OPS: "andrew23120,mauveflower,Lexington427,Apex_Steele" # Admins
   SNOOPER_ENABLED: "false"
