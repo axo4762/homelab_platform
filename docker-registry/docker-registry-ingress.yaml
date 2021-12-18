@@ -1,0 +1,28 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: docker-registry-ingress
+  namespace: production
+
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: PathPrefix(`/registry`)
+      kind: Rule
+      services:
+        - name: docker-registry-service
+          port: 5000
+          namespace: production
+      middlewares:
+        - name: docker-registry-stripprefix
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: docker-registry-stripprefix
+  namespace: production
+spec:
+  stripPrefix:
+    prefixes:
+      - /registry
