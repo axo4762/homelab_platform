@@ -19,6 +19,8 @@ spec:
           name: minecraft
           ports:
             - containerPort: 25565
+            - containerPort: 25566
+            - containerPort: 25575
           volumeMounts:
             - mountPath: /data
               name: minecraft-2022-data-data
@@ -27,6 +29,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: minecraft-2022-config
+            - secretRef:
+                name: minecraft-2022-secrets
       nodeSelector:
         nodePort: available
       volumes:

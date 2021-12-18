@@ -13,3 +13,7 @@ data:
   WHITELIST: "andrew23120,mauveflower,Lexington427,Apex_Steele" #Allowed Players
   OPS: "andrew23120,mauveflower,Lexington427,Apex_Steele" # Admins
   SNOOPER_ENABLED: "false"
+  ENABLE_RCON: "true"
+  RCON_PORT: "25575"
+  ENABLE_QUERY: "true"
+  QUERY_PORT: "25566"
