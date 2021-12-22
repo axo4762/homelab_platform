@@ -1,3 +1,5 @@
 scratch/*
 *secrets.yaml
 .env
+*.crt
+*.key
