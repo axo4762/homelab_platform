@@ -10,13 +10,18 @@ app = Flask(__name__)
 
 
 def minecraft_command(command) -> str:
+  print(os.getenv('RCON_HOST'))
+  print(os.getenv('RCON_PORT'))
   rcon = RCONClient(os.getenv('RCON_HOST'),os.getenv('RCON_PORT'))
-  success = rcon.login(os.getenv('RCON_PASSWORD'))
+  print(rcon)
+  success = rcon.authenticate(os.getenv('RCON_PASSWORD'))
+  print(rcon.is_connected())
+  print(rcon.is_authenticated())
+  print(success)
 
-  if success:
-    return rcon.command(command).replace('\u001b[0m','')
+  return rcon.command(command).replace('\u001b[0m','')
 
-  raise ConnectionError('Failed to connect to RCON')
+  #raise ConnectionError('Failed to connect to RCON')
 
 
 def minecraft_query() -> dict:

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-controller-deployment
+  namespace: production
+  labels:
+    app: minecraft-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft-controller
+  template:
+    metadata:
+      labels:
+        app: minecraft-controller
+    spec:
+      containers:
+        - image: server01-ubuntu:32000/minecraft-controller-image:latest
+          name: minecraft-controller
+          envFrom:
+            - configMapRef:
+                name: minecraft-controller-config
+            - secretRef:
+                name: minecraft-controller-secrets
+          ports:
+            - containerPort: 5000

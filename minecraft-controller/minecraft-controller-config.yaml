@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: minecraft-controller-config
+  namespace: production
+
+data:
+  RCON_HOST: minecraft-2022-rcon-service
+  RCON_PORT: "30003"
+  QUERY_HOST: minecraft-2022-query-service
+  QUERY_PORT: "30002"

@@ -1,0 +1,3 @@
+flask
+mctools
+python-dotenv
