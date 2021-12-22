@@ -8,7 +8,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: PathPrefix(`/registry`)
+    - match: PathPrefix(`/`)
       kind: Rule
       services:
         - name: docker-registry-service
@@ -16,13 +16,5 @@ spec:
           namespace: production
       middlewares:
         - name: docker-registry-stripprefix
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: docker-registry-stripprefix
-  namespace: production
-spec:
-  stripPrefix:
-    prefixes:
-      - /registry
+  tls:
+    secretName: docker-registry-secrets

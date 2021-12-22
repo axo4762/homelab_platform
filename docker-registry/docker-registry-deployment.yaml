@@ -20,9 +20,9 @@ spec:
           name: docker-registry
           env:
             - name: REGISTRY_HTTP_TLS_CERTIFICATE
-              value: "/certs/registry.crt"
+              value: "/certs/tls.crt"
             - name: REGISTRY_HTTP_TLS_KEY
-              value: "/certs/registry.key"
+              value: "/certs/tls.key"
           ports:
             - containerPort: 5000
           volumeMounts:
