@@ -25,7 +25,7 @@ spec:
     app: minecraft-2022
   ports:
     - protocol: TCP
-      port: 25575
+      port: 30003
       targetPort: 25575
       nodePort: 30003
 ---
@@ -40,6 +40,6 @@ spec:
     app: minecraft-2022
   ports:
     - protocol: UDP
-      port: 25566
+      port: 30002
       targetPort: 25566
       nodePort: 30002
